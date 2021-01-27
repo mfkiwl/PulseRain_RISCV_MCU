@@ -29,15 +29,15 @@
 //  memory size 
 //----------------------------------------------------------------------------
 
-`define SRAM_SIZE_IN_BYTES   (32*1024)
-`define DRAM_SIZE_IN_BYTES   (0 * 1024 * 1024)
+`define SRAM_SIZE_IN_BYTES   (0 * 1024)
+`define DRAM_SIZE_IN_BYTES   (8 * 1024 * 1024)
 `define DRAM_RW_BUFFER_SIZE  (1024/4)
 
 `define SRAM_ADDR_BITS       ((`SRAM_SIZE_IN_BYTES == 0) ? 1 : ($clog2(`SRAM_SIZE_IN_BYTES / 4)))
 
 `define DRAM_ADDR_BITS       ($clog2(`DRAM_SIZE_IN_BYTES / 4))
 
-`define MEM_ADDR_BITS        (`SRAM_ADDR_BITS)
+`define MEM_ADDR_BITS        (`DRAM_ADDR_BITS)
 
 
 `define MM_REG_SIZE_IN_BYTES   (128)
@@ -47,7 +47,7 @@
 //----------------------------------------------------------------------------
 //  clock 
 //----------------------------------------------------------------------------
-`define MCU_MAIN_CLK_RATE                  24000000
+`define MCU_MAIN_CLK_RATE                  100000000
 
 
 //----------------------------------------------------------------------------
@@ -113,11 +113,6 @@
     `define I2C_CSR_ADDR                       ((`MM_REG_ADDR_BITS)'(9))
     `define I2C_DATA_ADDR                      ((`MM_REG_ADDR_BITS)'(10))
     
-    //------------------------------------------------------------------------
-    // LMS6002D
-    //------------------------------------------------------------------------
-    `define LMS6002D_CSR_DAT_ADDR              ((`MM_REG_ADDR_BITS)'(11))
-    
 //----------------------------------------------------------------------------
 //  hardware mul/div
 //----------------------------------------------------------------------------
@@ -125,7 +120,7 @@
 
 `define DISABLE_OCD                         0
 
-`define ENABLE_HW_MUL_DIV                   0
+`define ENABLE_HW_MUL_DIV                   1
 
 `define SMALL_MACHINE_TIMER                 0
 `define SMALL_CSR_SET                       0
